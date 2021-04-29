@@ -4,33 +4,43 @@
 import subprocess
 import re
 
-def Stage4_Extracting_filesystem(firmware):
+def Stage4_Extracting_filesystem(firmware, filesystemType):
     
-    fylesystems = ['Squashfs', 'Romfs', 'Jffs2', 'Ubifs', 'Cramfs']
-    arch = ['ARM', 'MIPS', 'ARMEB', 'MIPSEL']
+    # Try extract filesystem
+    try:
+        subprocess.check_call('binwsalk -e ' + firmware, shell=True)
+        
+    except:
+        
+        # Wrile Filesystem address if config file
+        subprocess.check_call('binwalk ' + firmware + ' | grep -i filesystem | awk \'{print $2}\' >> config.conf', shell=True)
 
-    # Get filesystem type
-    output = subprocess.check_output('binwalk -e ' + firmware, shell=True)
-    for string in fylesystems:
-        scanFilesystem = re.findall(string, str(output))
-
-        if scanFilesystem: break
-
-    # Get Arch
-    output = subprocess.check_output('binwalk -A ' + firmware, shell=True)
-    for string in arch:    
-        scanArch = re.findall(string, str(output))
-
-        if scanArch: break
-
-    # Not found fylesysmet and arch (need check enthropy)
-    if ( not scanFilesystem and not scanArch ):
-        output = subprocess.run('binwalk -E ' +  firmware, shell=True)
-        return False
+        # Get Filesystem address from config file
+        with open("config.conf", "r") as f:
+            addressFilesystem = str(f.readlines()[3]).rstrip()
+        
+        # Put filesystem in manual mode
+        subprocess.check_call('dd if=' + firmware + ' bs=1 skip=$((' + addressFilesystem + ')) of=dir.' + filesystemType, shell=True)
+        print(filesystemType)
     
-    # Write in config file
-    file = open("config.conf", "w")
-    file.write("Firmware: " + str(firmware) + "\nFylesystem: " + str(scanFilesystem[0] + "\n" + "Arch: " + str(scanArch[0] + "\n")))
-    file.close()
+        # Unpaking filesystem in manual mode
+        if filesystemType == "squashfs":
+            subprocess.check_call('unsquashfs dir.squshfs', shell=True)
+        
+        if filesystemType == "romfs":
+            subprocess.check_call('extract-romfs dir.romfs', shell=True)
+
+        if filesystemType == "jfss2":
+            subprocess.check_call('jefferson dir.jfss2', shell=True)
+
+        if filesystemType == "ubifs":
+            subprocess.check_call('python3 ubidump.py dir.ubi', shell=True)
+
+        if filesystemType == "cramfs":
+            subprocess.check_call('uncramfs dir.cramfs', shell=True)
+
+        if filesystemType == "cpio":
+            subprocess.check_call('cpio -iv dir.cpio', shell=True)
+            return False
 
     return True
