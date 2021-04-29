@@ -5,8 +5,8 @@ import subprocess
 import re
 
 def Stage3_Analyzing_firmware(firmware):
-    fylesystems = ['Squashfs', 'Romfs', 'Jffs2', 'Ubifs', 'Cramfs']
-    arch = ['ARM', 'MIPS', 'ARMEB', 'MIPSEL']
+    fylesystems = ['Squashfs', 'Romfs', 'Jffs2', 'Ubifs', 'Cramfs', 'Cpio']
+    arch = ['ARM', 'MIPS']
 
     # Get filesystem type
     output = subprocess.check_output('binwalk ' + firmware, shell=True)
@@ -31,5 +31,6 @@ def Stage3_Analyzing_firmware(firmware):
     file = open("config.conf", "w")
     file.write("Firmware: " + str(firmware) + "\nFylesystem: " + str(scanFilesystem[0] + "\n" + "Arch: " + str(scanArch[0] + "\n")))
     file.close()
-
-    return True
+    S=(str(scanFilesystem[0]))
+    # print(S.lower())
+    return S.lower()
