@@ -72,3 +72,31 @@
 | Linksys E1200(v2.0.7) | mips (mipsel) | 39,4 | null | 38,9
 | Keenetic Start KN-1111(stable_3.04.C.12.0-0) | mips (mipsel) | 28,2 | null | 26,8
 
+##### Визуализация (Arm):
+![Иллюстрация к проекту](https://github.com/mrTavas/owasp-fstm-auto/blob/main/artwork/Emul-Arm.png?raw=true)
+##### Визуализация (Mips):
+![Иллюстрация к проекту](https://github.com/mrTavas/owasp-fstm-auto/blob/main/artwork/Emul-Mips.png?raw=true)
+
+---
+### Этап 7. Динамический анализ
+
+Для фаззинг тестирования прикладных сервисов OWASP рекомендует использовать следующие фаззеры:
+- American fuzzy lop
+- FIRM-AFL
+- Firmcorn
+
+В целях оптимизации, был проведен эксперимент для определения наиболее оптимального решения для прошивок IoT устройств. Результаты эксперимента представленны в таблице ниже. По полученным данным, наиболее оптимальным решением является Firmcorn, который в среднем может обечпечить увеличение скорости фаззинг тестирования на 13-20%.
+
+| Firmware       | Service      |   Vulnerability  |  AFL (qemu mode) | Firm-AFL | Firmcorn
+|:--------------:|:------------:|:----------------:|:-----------:|:---------------:|:------:|
+| TP-Link WR940N(V4) | httpd | Buffer Overflow | >24h | >24h | 7h 31m
+| TP-Link WR941N(V4) | httpd | Buffer Overflow | >24h | 20h 41m | 8h 05m
+| DLink DIR-850L(V1.03) | hnap | Buffer Overflow | 7h 52m | 3h 14m | 2h 33m
+| IP Camera Trendnet TV-IP110WN(V.1.2.2) | video.cgi | Buffer Overflow | 7h 59m | 4h 39m | 4h 28m
+| D-Link DIR-825(V2.02) | httpd | Buffer Overflow | >24h | 22h 57m | 18h 44m
+| D-Link DAP-2695(V1.11) | httpd | Buffer Overflow | 3h 09m | 2h 46m | 3h 17m
+| IP CameraTrendnet TV-IP110WN(V.1.2.2) | network.cgi | Buffer Overflow | 20h 40m | 8h 19m | 7h 50m
+
+
+##### Визуализация:
+![Иллюстрация к проекту](https://github.com/mrTavas/owasp-fstm-auto/blob/main/artwork/Dyn-Fuzzers.png?raw=true)
