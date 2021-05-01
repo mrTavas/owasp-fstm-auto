@@ -41,7 +41,34 @@
 
 - По результатом очевидно, что использование binwalk наиболее оптимально. Также при ошибке автоматического извлечения файловой системы был реализован алгоритм альтернативного способа извлечения.
 
+![Иллюстрация к проекту](https://github.com/mrTavas/owasp-fstm-auto/blob/main/artwork/Extr-filesys.png?raw=true)
 
+- За автоматизацию извлечения файловой сисмемы отвечает [данный модуль](https://github.com/mrTavas/owasp-fstm-auto/blob/main/stage4_Extracting_filesystem.py). 
 
+---
+### Этап 5. Анализ файловой системы
 
+В ходе этапа анализа файловой системы необходимо автоматизировать поиск устаревших небезопасных сервисов, поиск в CVE-базах и Exploit-базах по версиям найденных сервисов, поиск жестко закодированных учетных данных (имена пользователей, пароли, ключи API, ключи SSH), функционал обновления прошивки, который может использоваться в качестве точки входа.
+
+---
+### Этап 6. Эмуляция прошивки
+
+Для полной эмуляции прошивок, OWASP рекомендует использовать Firmware-analysis-toolkit, Arm-x или Qiling. По результатам проведенных в данном проекте исследованиям, для прошивок с arm архитектурой оптимально использовать Arm-x, а для Mips оптимальнее эмулятор Qiling. Ниже представлена таблица с результатами эксперимента.
+
+| Firmware       | Architecture |        FAT %CPU  |  ARM-X %CPU | Qiling %CPU |
+|:--------------:|:------------:|:----------------:|:-----------:|:---------------:|
+| Tenda AC15 Wi-Fi Router(V15.03.05.18_multi_TD01) | arm (armel) | 49,7 | 32,5 | 49,6
+| ARcher C9 Wi-Fi Router(V5_190403) | arm (armel) | 50,2 | 29,9 | 48,7
+| IP Camera Trivision NC-277 WF(V4.50B20140101) | arm (armel) | 43,8 | 29,1 | 44,9
+| Asus RT-AC1900P(3.0.0.4_384_32738-gc9a116a) | arm (armel) | 57,5 | 40,3 | 58,4
+| RV160W Wireless-AC VPN-Router | arm (armel) | 63,1 | 41,7 | 64
+| IoTGoat-raspberry-pi2(v1.0) | arm (armel) | 41,2 | 30,9 | 40,3
+| IP-камера Foscam FI8908W(lr_cmos_11_14_1_46) | arm (armel) | 38,7 | 29,8 | 38
+| TP-Link TL-WR941ND v4_en_3_12_8_up) | mips (mipseb) | 24,7 | null | 25,9
+| Netgear DGN2200(v4-V1.0.0.116_1.0.116) | mips (mipseb) | 30,8 | null | 29,3
+| DLink DIR-823(A1-v1.00) | mips (mipseb) | 32,8 | null | 30,6
+| Netgear Wnap320(Version 2.0.3) | mips (mipseb) | 23,5 | null | 20,4
+| IP Camera DLink-DCS-5010(L-1.13.05) | mips (mipseb) | 24,3 | null | 20,1
+| Linksys E1200(v2.0.7) | mips (mipsel) | 39,4 | null | 38,9
+| Keenetic Start KN-1111(stable_3.04.C.12.0-0) | mips (mipsel) | 28,2 | null | 26,8
 
