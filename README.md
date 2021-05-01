@@ -19,17 +19,29 @@
 Для извлечения файловой системы OWASP рекомендует использовать [Binwalk](https://github.com/ReFirmLabs/binwalk) или [Firmware Mod Kit](https://github.com/rampageX/firmware-mod-kit/wiki). Для определения наиболее оптимального инструмента был проведен эксперемент по сравнению данных инструментов.
 
 
+| Filesystem     | Architecture |        Firmware                                    |  Binwalk |Firmware mod kit |
+|:--------------:|:------------:|:--------------------------------------------------:|:--------:|:---------------:|
+|Squashfs        | ARM          |Damn Vulnerable Router Firmware(DVRF)v0.3           | 0m 11,2s | 0m 33,8s
+|Squashfs        | MIPS         |DLink-DIR 823A1 v1.00                               | 0m 9,8s  | 0m 20,9s
+|Squashfs        | ARM          | DLink-DIR 629 A1-FWv1.03(for DCN)                  | 0m 9,7s  | 0m 10,9s
+|Squashfs        | ARM          | DLink-DIR 816 A2_FWv1.10(for DCN)                  | 0m 9,2s  | 0m 10,9s
+|Squashfs        | ARM          | DLink-DIR 859 A3-FWv1.05                           | 0m 11,5s | 0m 13,1s
+|Squashfs        | ARM          | DLink-DIR 629 B1-FWv2.01                           | 0m 9,9s  | 0m 13,1s
+|Squashfs        | ARM          | TP-Link wr941nv4 en_3_12_8_up (110117)             | 0m 11,2s | 0m 28,1s
+|Squashfs        | MIPS         | TP-Link wr940nv4 us_3_16_9_up_boot (160617)        | 0m 10,1s |0m 19,1s
+|Romfs           | ARM          | IP-камера Foscam-FI8908W(lr_cmos_11_14_1_46)       | 0m 9, 2s | No supported
+|Romfs           | ARM          | Go Pro-Hero7(black-1.9-firmware)                   | 8m 35,6s | No supported
+|Jffs2           | MIPS         | Netgear-DGN2200v4-V1.0.0.116_1.0.116               | 1m 2,9s  | 1m 17,9s
+|Jffs2           | MIPS         | Netgear-DGN2200M-V1.0.0.26                         | 0m 45,1s | 0m 49,8s
+|Ubifs           | ARM          | Openwrt-19.07.7 oxnas-ox820 akitio mycloud         | 0m 25,5s | No supported
+|Ubifs           | ARM          | 8devices-Rambutan(factory-to-ddwrt)                | 2m 49,5s | No supported
+|Cramfs          | ARM          | Hangzhou Xiongmai DVR-MBD6016E-E_V4                | 0m 5,7s  | 0m 14,6s
+|Cramfs          | ARM          | Polyvision PVDR (16WDS2_revD_AHB7016T LM_V4.02)    | 0m 6,1s  | 0m 14,9s
+|Cramfs          | ARM          | Optimus NBD6308T (PL_V4.02)                        | 0m 5,6s  | 0m 14,4s
 
-Файловая система |  Архитектура |   Название устройства (и версия прошивки) |   binwalk |   firmware mod kit  |
-|----------------|--------------|-------------------------------------------|-----------|---------------------|
-| Squashfs       | ARM          |Damn Vulnerable Router Firmware (DVRF) v0.3| 0m11,298s |   0m33,880s         |
-|| MIPS | DLink-DIR-823 A1-v1.00 | 0m9,870s | 0m20,912s
-|| ARM | DLink-DIR-629 A1-FW v1.03 (for DCN) | 0m9,726s | 0m10,994s
-|| ARM | DLink-DIR-816 A2_FW v1.10 (for DCN) | 0m9,286s | 0m10,933s
-|| ARM | DLink-DIR-859 A3-FW v1.05 | 0m11,560s | 0m13,097s
-|| ARM | DLink-DIR-629 B1-FW v2.01 | 0m9,999s | 0m13,053s
-|| ARM | TP-Link wr941nv4_en_3_12_8_up(110117) | 0m11,255s | 0m28,113s
-|| MIPS | TP-Link wr940nv4_us_3_16_9_up_boot(160617) | 0m10,129s |0m19,120s
+- По результатом очевидно, что использование binwalk наиболее оптимально. Также при ошибке автоматического извлечения файловой системы был реализован алгоритм альтернативного способа извлечения.
+
+
 
 
 
