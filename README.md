@@ -23,34 +23,13 @@
 Файловая система |  Архитектура |   Название устройства (и версия прошивки) |   binwalk |   firmware mod kit  |
 |----------------|--------------|-------------------------------------------|-----------|---------------------|
 | Squashfs       | ARM          |Damn Vulnerable Router Firmware (DVRF) v0.3| 0m11,298s |   0m33,880s         |
-MIPS
-DLink-DIR-823 A1-v1.00
-0m9,870s
-0m20,912s
-ARM 
-DLink-DIR-629 A1-FW v1.03 (for DCN)
-0m9,726s
-0m10,994s
-ARM
-DLink-DIR-816 A2_FW v1.10 (for DCN)
-0m9,286s
-0m10,933s
-ARM
-DLink-DIR-859 A3-FW v1.05
-0m11,560s
-0m13,097s
-ARM
-DLink-DIR-629 B1-FW v2.01
-0m9,999s
-0m13,053s
-ARM
-TP-Link wr941nv4_en_3_12_8_up(110117)
-0m11,255s
-0m28,113s
-MIPS
-TP-Link wr940nv4_us_3_16_9_up_boot(160617)
-0m10,129s
-0m19,120s
+|| MIPS | DLink-DIR-823 A1-v1.00 | 0m9,870s | 0m20,912s
+|| ARM | DLink-DIR-629 A1-FW v1.03 (for DCN) | 0m9,726s | 0m10,994s
+|| ARM | DLink-DIR-816 A2_FW v1.10 (for DCN) | 0m9,286s | 0m10,933s
+|| ARM | DLink-DIR-859 A3-FW v1.05 | 0m11,560s | 0m13,097s
+|| ARM | DLink-DIR-629 B1-FW v2.01 | 0m9,999s | 0m13,053s
+|| ARM | TP-Link wr941nv4_en_3_12_8_up(110117) | 0m11,255s | 0m28,113s
+|| MIPS | TP-Link wr940nv4_us_3_16_9_up_boot(160617) | 0m10,129s |0m19,120s
 
 
 
