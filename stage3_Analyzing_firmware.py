@@ -29,9 +29,11 @@ def Stage3_Analyzing_firmware(firmware):
     
     # Write in config file
     file = open("config.conf", "w")
+    
     file.write("Firmware: " + str(firmware) + "\nFylesystem: " + 
     str(scanFilesystem[0] + "\n" + "Arch: " + str(scanArch[0] + "\n")))
+    
     file.close()
     S=(str(scanFilesystem[0]))
-    # print(S.lower())
+    
     return S.lower()
