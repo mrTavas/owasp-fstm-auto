@@ -1,6 +1,7 @@
 # OWASP-FSTM-Auto
 ![Python 3.6](https://img.shields.io/badge/Python-3.6-green.svg?style=plastic)
 ![OS](https://img.shields.io/badge/OS-GNU%2FLinux-000000.svg?style=plastic)
+[![OWASP Flagship](https://img.shields.io/badge/OWASP-FSTM-blue.svg?style=plastic)](https://scriptingxss.gitbook.io/firmware-security-testing-methodology/)
 
 Цель данного проекта - повысить эффективность методологии выявления уязвимостей в прошивках IoT устройств [OWASP FSTM](https://scriptingxss.gitbook.io/firmware-security-testing-methodology/) путем ее оптимизации и автоматизации.
 
